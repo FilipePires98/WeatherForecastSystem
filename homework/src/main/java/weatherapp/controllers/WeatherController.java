@@ -68,7 +68,6 @@ public class WeatherController {
         // validating path variables
         if(days < 1){ days = 1; }
         if(days > 7){ days = 7; }
-        System.out.println(days);
         // using the weather service
         return weatherService.get(latitude + "," + longitude, "recent", new Long[]{Long.valueOf(days)}).toString();
     }
