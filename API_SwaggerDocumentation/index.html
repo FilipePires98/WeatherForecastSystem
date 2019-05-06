@@ -1,0 +1,439 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Weather API</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>Weather API</h1>
+    <div class="app-desc">Homework 1 - Test Development</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="filipesnetopires@ua.pt">filipesnetopires@ua.pt</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/weather</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Client">Client</a></h4>
+  <ul>
+  <li><a href="#getWeatherCache"><code><span class="http-method">get</span> /cached</code></a></li>
+  <li><a href="#getWeatherNow"><code><span class="http-method">get</span> /now/{latitude},{longitude}</code></a></li>
+  <li><a href="#getWeatherPeriod"><code><span class="http-method">get</span> /period/{latitude},{longitude}/{start},{end}</code></a></li>
+  <li><a href="#getWeatherRecent"><code><span class="http-method">get</span> /recent/{latitude},{longitude}/{days}</code></a></li>
+  </ul>
+
+  <h1><a name="Client">Client</a></h1>
+  <div class="method"><a name="getWeatherCache"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /cached</code></pre></div>
+    <div class="method-summary">get weather forecasts previously requested and still present in cache (<span class="nickname">getWeatherCache</span>)</div>
+    <div class="method-notes">By requesting the cached forecasts, you can see all previously made predictions as long as they are still in cache</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    All cached weather forecasts.
+        <a href="#"></a>
+    <h4 class="field-label">5XX</h4>
+    Unexpected error.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getWeatherNow"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /now/{latitude},{longitude}</code></pre></div>
+    <div class="method-summary">get weather forecast of the current day for the given coordinates (<span class="nickname">getWeatherNow</span>)</div>
+    <div class="method-notes">By passing in the appropriate coordinates, you can search for today's weather forecast in any place of the world</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">latitude (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass a latitude coordinate </div><div class="param">longitude (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass a longitude coordinate </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Today's weather forecast.
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Bad input parameter.
+        <a href="#"></a>
+    <h4 class="field-label">5XX</h4>
+    Unexpected error.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getWeatherPeriod"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /period/{latitude},{longitude}/{start},{end}</code></pre></div>
+    <div class="method-summary">get weather forecast of the given time period for the given coordinates (<span class="nickname">getWeatherPeriod</span>)</div>
+    <div class="method-notes">By passing in the appropriate coordinates, you can search for today's weather forecast in any place of the world</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">latitude (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass a latitude coordinate </div><div class="param">longitude (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass a longitude coordinate </div><div class="param">start (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass the first day of the desired prediction format: yyyy-MM-dd</div><div class="param">end (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass the last day of the desired prediction format: yyyy-MM-dd</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    The given time period weather forecasts.
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Bad input parameter.
+        <a href="#"></a>
+    <h4 class="field-label">5XX</h4>
+    Unexpected error.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getWeatherRecent"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /recent/{latitude},{longitude}/{days}</code></pre></div>
+    <div class="method-summary">get weather forecast of the next days starting from today until the given number of days for the given coordinates (<span class="nickname">getWeatherRecent</span>)</div>
+    <div class="method-notes">By passing in the appropriate coordinates and the number of desired days, you can search for up to 7 days of weather forecast in any place of the world starting from today</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">latitude (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass a latitude coordinate </div><div class="param">longitude (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass a longitude coordinate </div><div class="param">days (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; pass the number of days desired </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    The given number of days weather forecasts.
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Bad input parameter.
+        <a href="#"></a>
+    <h4 class="field-label">5XX</h4>
+    Unexpected error.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#ArrayOfForecasts"><code>ArrayOfForecasts</code> - </a></li>
+    <li><a href="#Forecast"><code>Forecast</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="ArrayOfForecasts"><code>ArrayOfForecasts</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Forecast"><code>Forecast</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">time (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The forecast's time in milliseconds </div>
+<div class="param">summary (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The weather summary for the given time </div>
+<div class="param">icon (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The icon that represents the forecast </div>
+<div class="param">sunriseTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time of sunrise in milliseconds </div>
+<div class="param">sunsetTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time of sunset in milliseconds </div>
+<div class="param">moonPhase (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The current moon phase value </div>
+<div class="param">precipIntensity (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the precipitation intensity </div>
+<div class="param">precipIntensityMax (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the maximum precipitation intensity </div>
+<div class="param">precipIntensityMaxTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of maximum precipitation </div>
+<div class="param">precipProbability (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The percentage probability of precipitation </div>
+<div class="param">precipType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The type of precipitation </div>
+<div class="param">temperatureHigh (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the high temperature predicted </div>
+<div class="param">temperatureHighTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of high temperature </div>
+<div class="param">temperatureLow (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the low temperature predicted </div>
+<div class="param">temperatureLowTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of low temperature </div>
+<div class="param">apparentTemperatureHigh (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the high apparent temperature predicted </div>
+<div class="param">apparentTemperatureHighTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of high apparent temperature </div>
+<div class="param">apparentTemperatureLow (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the low apparent temperature predicted </div>
+<div class="param">apparentTemperatureLowTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of low apparent temperature </div>
+<div class="param">dewPoint (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted dew point </div>
+<div class="param">humidity (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted humidity </div>
+<div class="param">pressure (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted pressure </div>
+<div class="param">windSpeed (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted wind speed </div>
+<div class="param">windGust (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted wind gusts </div>
+<div class="param">windGustTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of wind gusts </div>
+<div class="param">windBearing (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted wind bearing </div>
+<div class="param">cloudCover (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The percentage of predicted cloud coverture </div>
+<div class="param">uvIndex (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The maximum UV index value predicted </div>
+<div class="param">uvIndexTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of maximum UV index value </div>
+<div class="param">visibility" (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the predicted visibility </div>
+<div class="param">ozone (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The predicted value of ozone presence </div>
+<div class="param">temperatureMax (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the maximum temperature predicted </div>
+<div class="param">temperatureMaxTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of maximum temperature </div>
+<div class="param">temperatureMin (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the minimum temperature predicted </div>
+<div class="param">temperatureMinTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of minimum temperature </div>
+<div class="param">apparentTemperatureMax (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the maximum apparent temperature predicted </div>
+<div class="param">apparentTemperatureMaxTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of maximum apparent temperature </div>
+<div class="param">apparentTemperatureMin (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The value of the minimum apparent temperature predicted </div>
+<div class="param">apparentTemperatureMinTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The time in milliseconds of occurrence of minimum apparent temperature </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
