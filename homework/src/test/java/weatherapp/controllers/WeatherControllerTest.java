@@ -12,12 +12,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.is;
-
-
 
 /**
  * Test class used to ensure the correct functioning of the WeatherController.
@@ -62,7 +59,7 @@ public class WeatherControllerTest {
      * Test of getWeatherNow method, of class WeatherController.
      */
     @Test
-    public void testGetWeatherNowSuccess() throws Exception {
+    public void testGetWeatherNow() throws Exception {
         System.out.println("getWeatherNowSuccess");
         // arrange
         String expResultStr = "{\"time\":1556838000,\"summary\":\"Breezy starting in the afternoon, continuing until evening.\",\"icon\":\"wind\",\"sunriseTime\":1556861541,\"sunsetTime\":1556911989,\"moonPhase\":0.95,\"precipIntensity\":0,\"precipIntensityMax\":0,\"precipProbability\":0,\"temperatureHigh\":72.37,\"temperatureHighTime\":1556877600,\"temperatureLow\":54.23,\"temperatureLowTime\":1556949600,\"apparentTemperatureHigh\":72.37,\"apparentTemperatureHighTime\":1556877600,\"apparentTemperatureLow\":54.23,\"apparentTemperatureLowTime\":1556949600,\"dewPoint\":50.99,\"humidity\":0.72,\"pressure\":1011.42,\"windSpeed\":9.6,\"windGust\":33.66,\"windGustTime\":1556899200,\"windBearing\":4,\"cloudCover\":0.08,\"uvIndex\":7,\"uvIndexTime\":1556884800,\"visibility\":7.08,\"ozone\":346.98,\"temperatureMin\":47.13,\"temperatureMinTime\":1556863200,\"temperatureMax\":72.37,\"temperatureMaxTime\":1556877600,\"apparentTemperatureMin\":44.09,\"apparentTemperatureMinTime\":1556863200,\"apparentTemperatureMax\":72.37,\"apparentTemperatureMaxTime\":1556877600}";
