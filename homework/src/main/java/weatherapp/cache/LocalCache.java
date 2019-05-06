@@ -30,11 +30,11 @@ public class LocalCache<K,V> {
         /**
          * Long variable holding the time in milisseconds of the last access made to the cached object
          */
-        public long lastAccessed;
+        private long lastAccessed;
         /**
          * Actual data to be cached in memory
          */
-        public V value;
+        private V value;
  
         /**
          * Default constructor accepting the data to be cached and calculating the last time accessed.
@@ -54,21 +54,27 @@ public class LocalCache<K,V> {
      * with time-to-life equal to 10 seconds and timer interval equal to 1 second.
      */
     public LocalCache() {
-        long timeToLive = 10;
+        long chosenTimeToLive = 10;
         final long timerInterval = 1;
         
-        this.timeToLive = timeToLive * 1000;
+        this.timeToLive = chosenTimeToLive * 1000;
         cache = new HashMap();
+        
+        boolean running = true;
  
         if (timeToLive > 0 && timerInterval > 0) {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (running) {
                         try {
                             Thread.sleep(timerInterval * 1000);
-                        } catch (InterruptedException ex) { }
+                        } catch (InterruptedException ex) { 
+                            System.err.println(ex);
+                            System.exit(1);
+                        }
                         clear(); // clears only those whose ttl has ended
+                        
                     }
                 }
             });
@@ -87,15 +93,20 @@ public class LocalCache<K,V> {
     public LocalCache(long timeToLive, final long timerInterval) {
         this.timeToLive = timeToLive * 1000;
         cache = new HashMap();
+        
+        boolean running = true;
  
         if (timeToLive > 0 && timerInterval > 0) {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (running) {
                         try {
                             Thread.sleep(timerInterval * 1000);
-                        } catch (InterruptedException ex) { }
+                        } catch (InterruptedException ex) { 
+                            System.err.println(ex);
+                            System.exit(1);
+                        }
                         clear(); // clears only those whose ttl has ended
                     }
                 }
@@ -128,7 +139,7 @@ public class LocalCache<K,V> {
      */
     public V get(K key){
         synchronized (cache) {
-            CacheObject c = (CacheObject) cache.get(key);
+            CacheObject c = cache.get(key);
             if (c == null) {
                 return null;
             } else {
@@ -154,7 +165,7 @@ public class LocalCache<K,V> {
             }
             CacheObject c;
             for(K k: keys) {
-                c = (CacheObject) cache.get(k);
+                c = cache.get(k);
                 if (c != null) {
                     c.lastAccessed = access;
                     ca.add(c.value);
@@ -229,11 +240,8 @@ public class LocalCache<K,V> {
      */
     public boolean containsKey(K key){
         synchronized (cache) {
-            CacheObject c = (CacheObject) cache.get(key);
-            if (c == null) {
-                return false;
-            }
-            return true;
+            CacheObject c =  cache.get(key);
+            return c != null;
         }
     }
 }
