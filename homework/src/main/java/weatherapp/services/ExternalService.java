@@ -35,7 +35,7 @@ public class ExternalService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
         // retrieving data from the external api
         ResponseEntity<String> response = restTemplate.exchange(path, HttpMethod.GET, entity, String.class);
-        String darkSky = (String)response.getBody();
+        String darkSky = response.getBody();
         JsonObject darkSkyJSON = new JsonParser().parse(darkSky).getAsJsonObject();
         JsonArray requestedData = new JsonArray();
         if(darkSkyJSON.has("error")) {

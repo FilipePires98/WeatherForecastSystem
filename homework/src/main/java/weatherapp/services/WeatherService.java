@@ -2,7 +2,6 @@ package weatherapp.services;
 
 import weatherapp.cache.LocalCache;
 import com.google.gson.*;
-import java.text.*;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -93,12 +92,13 @@ public class WeatherService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         // preparing request 
         String path = "https://api.darksky.net/forecast/" + this.darkSkyKey + "/" + coords;
+        String pathExclude = "?exclude=currently,minutely,hourly,alerts,flags";
         JsonArray httpResponse;
         JsonArray requestedData = new JsonArray();
         Long currentTime = System.currentTimeMillis() / 1000;
         // treating the response
         if(type.equals("recent")) {
-            path = path + "?exclude=currently,minutely,hourly,alerts,flags";
+            path = path + pathExclude;
             httpResponse = this.httpRequest(path, headers);
             Long days = options[0];
             for(int i=0; i<days; i++) {
@@ -110,15 +110,13 @@ public class WeatherService {
             Long endingTime = options[1];
             String current_path;
             while(startingTime <= endingTime) {
-                current_path = path + "," + startingTime
-                     + "?exclude=currently,minutely,hourly,alerts,flags";
+                current_path = path + "," + startingTime + pathExclude;
                 httpResponse = this.httpRequest(current_path, headers);
                 requestedData.add(httpResponse.get(0));
                 startingTime = startingTime + 86400;
             }
         } else { // type.equals("now")
-            path = path + "," + currentTime
-                 + "?exclude=currently,minutely,hourly,alerts,flags";
+            path = path + "," + currentTime + pathExclude;
             httpResponse = this.httpRequest(path, headers);
             requestedData.add(httpResponse.get(0));
         }
@@ -137,7 +135,7 @@ public class WeatherService {
      */
     public JsonArray getAll(Boolean updateLastAccessed) {
         Gson gson = new GsonBuilder().create();
-        Object[] cache = (Object[]) this.localCache.getAll(updateLastAccessed);
+        Object[] cache = this.localCache.getAll(updateLastAccessed);
         JsonArray all = new JsonArray();
         for(Object o: cache) {
             all.add((JsonObject) gson.toJsonTree(o));
@@ -153,7 +151,7 @@ public class WeatherService {
      * @param formatString format in which the date string is written
      * @return Long value holding the specified date in milliseconds
      */
-    private Long getDateFromString(String dateString, String formatString) {
+    /*private Long getDateFromString(String dateString, String formatString) {
         SimpleDateFormat format = new SimpleDateFormat(formatString);
         Date date;
         try {
@@ -162,5 +160,5 @@ public class WeatherService {
             return -1L;
         }
         return date.getTime() / 1000;
-    }
+    }*/
 }

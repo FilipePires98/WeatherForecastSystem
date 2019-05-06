@@ -78,7 +78,6 @@ public class WeatherApplicationIT {
         driver.findElement(By.id("show_and_hide")).click();
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(By.id("author")), 250, 250).click().build().perform();
-        Thread.sleep(5000);
     }
     
     /**

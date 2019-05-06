@@ -70,7 +70,7 @@ public class LocalCache<K,V> {
                         try {
                             Thread.sleep(timerInterval * 1000);
                         } catch (InterruptedException ex) { 
-                            System.err.println(ex);
+                            Thread.currentThread().interrupt();
                             System.exit(1);
                         }
                         clear(); // clears only those whose ttl has ended
@@ -104,7 +104,7 @@ public class LocalCache<K,V> {
                         try {
                             Thread.sleep(timerInterval * 1000);
                         } catch (InterruptedException ex) { 
-                            System.err.println(ex);
+                            Thread.currentThread().interrupt();
                             System.exit(1);
                         }
                         clear(); // clears only those whose ttl has ended

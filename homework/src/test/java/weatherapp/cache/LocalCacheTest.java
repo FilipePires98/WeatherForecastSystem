@@ -146,11 +146,6 @@ public class LocalCacheTest {
             instance2.put(keys[i], expResult[i]);
         }
         // act
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            fail("Test did not execute correctly.");
-        }
         instance2.clear();
         // assert
         assertThat(instance.size()).isEqualTo(0);//assertEquals(0,instance.size());
