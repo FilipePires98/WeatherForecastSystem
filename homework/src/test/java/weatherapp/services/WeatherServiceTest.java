@@ -102,6 +102,33 @@ public class WeatherServiceTest {
         assertThat(result.size()).isEqualTo(expResult.size());
         assertThat(result.get(0).getAsJsonObject().keySet()).isEqualTo(expResult.get(0).getAsJsonObject().keySet());
     }
+    
+    /**
+     * Test of get method, of class WeatherService.
+     */
+    @Test
+    public void testGetRecent() {
+        System.out.println("get recent");
+        // arrange
+        headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String type = "recent";
+        Long[] options = new Long[]{Long.valueOf(2)};
+        String path = "https://api.darksky.net/forecast/" + darkSkyKey + "/" + coords + "?exclude=currently,minutely,hourly,alerts,flags";
+        String expResultStr = "{\"time\":1556406000,\"summary\":\"Foggy in the morning.\",\"icon\":\"fog\",\"sunriseTime\":1556429923,\"sunsetTime\":1556479673,\"moonPhase\":0.8,\"precipIntensity\":0,\"precipIntensityMax\":0,\"precipProbability\":0,\"temperatureHigh\":68.85,\"temperatureHighTime\":1556460000,\"temperatureLow\":52.26,\"temperatureLowTime\":1556506800,\"apparentTemperatureHigh\":68.85,\"apparentTemperatureHighTime\":1556460000,\"apparentTemperatureLow\":52.26,\"apparentTemperatureLowTime\":1556506800,\"dewPoint\":52.92,\"humidity\":0.85,\"pressure\":1021.43,\"windSpeed\":5.18,\"windGust\":12.34,\"windGustTime\":1556470800,\"windBearing\":355,\"cloudCover\":0.3,\"uvIndex\":8,\"uvIndexTime\":1556456400,\"visibility\":5.4,\"ozone\":309.01,\"temperatureMin\":46.48,\"temperatureMinTime\":1556427600,\"temperatureMax\":68.85,\"temperatureMaxTime\":1556460000,\"apparentTemperatureMin\":44.92,\"apparentTemperatureMinTime\":1556427600,\"apparentTemperatureMax\":68.85,\"apparentTemperatureMaxTime\":1556460000}";
+        JsonObject expResultObj = new JsonParser().parse(expResultStr).getAsJsonObject();
+        JsonArray expResult = new JsonArray();
+        expResult.add(expResultObj);expResult.add(expResultObj);
+        Mockito.when(externalService.getWeatherForecast(path, headers)).thenReturn(expResult);
+        Mockito.when(localCache.getAll(false)).thenReturn(new Object[0]);
+        //Mockito.when(localCache.get(coords + "," + type)).thenReturn(expResult);
+        // act
+        JsonArray result = weatherService.get(coords, type, options);
+        //assert
+        assertThat(result.size()).isEqualTo(expResult.size());
+        assertThat(result.get(0).getAsJsonObject().keySet()).isEqualTo(expResult.get(0).getAsJsonObject().keySet());
+    }
 
     /**
      * Test of get method, of class WeatherService.
