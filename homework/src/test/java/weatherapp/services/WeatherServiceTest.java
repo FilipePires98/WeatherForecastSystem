@@ -6,12 +6,13 @@ import com.google.gson.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.*;
 import org.springframework.http.*;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test class used to ensure the correct functioning of the WeatherService.
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Filipe Pires
  */
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class WeatherServiceTest {
     
     @TestConfiguration
@@ -71,13 +73,42 @@ public class WeatherServiceTest {
     public void tearDown() {
     }
     */
+    
+    /**
+     * Test of get method, of class WeatherService.
+     */
+    @Test
+    public void testGetNow() {
+        System.out.println("get now");
+        // arrange
+        headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String type = "now";
+        Long[] options = new Long[0];
+        Long currentTime = System.currentTimeMillis() / 1000;
+        String path = "https://api.darksky.net/forecast/" + darkSkyKey + "/" + coords + "," + currentTime + "?exclude=currently,minutely,hourly,alerts,flags";
+        
+        String expResultStr = "{\"time\":1556406000,\"summary\":\"Foggy in the morning.\",\"icon\":\"fog\",\"sunriseTime\":1556429923,\"sunsetTime\":1556479673,\"moonPhase\":0.8,\"precipIntensity\":0,\"precipIntensityMax\":0,\"precipProbability\":0,\"temperatureHigh\":68.85,\"temperatureHighTime\":1556460000,\"temperatureLow\":52.26,\"temperatureLowTime\":1556506800,\"apparentTemperatureHigh\":68.85,\"apparentTemperatureHighTime\":1556460000,\"apparentTemperatureLow\":52.26,\"apparentTemperatureLowTime\":1556506800,\"dewPoint\":52.92,\"humidity\":0.85,\"pressure\":1021.43,\"windSpeed\":5.18,\"windGust\":12.34,\"windGustTime\":1556470800,\"windBearing\":355,\"cloudCover\":0.3,\"uvIndex\":8,\"uvIndexTime\":1556456400,\"visibility\":5.4,\"ozone\":309.01,\"temperatureMin\":46.48,\"temperatureMinTime\":1556427600,\"temperatureMax\":68.85,\"temperatureMaxTime\":1556460000,\"apparentTemperatureMin\":44.92,\"apparentTemperatureMinTime\":1556427600,\"apparentTemperatureMax\":68.85,\"apparentTemperatureMaxTime\":1556460000}";
+        JsonObject expResultObj = new JsonParser().parse(expResultStr).getAsJsonObject();
+        JsonArray expResult = new JsonArray();
+        expResult.add(expResultObj);
+        Mockito.when(externalService.getWeatherForecast(path, headers)).thenReturn(expResult);
+        Mockito.when(localCache.getAll(false)).thenReturn(new Object[0]);
+        //Mockito.when(localCache.get(coords + "," + type)).thenReturn(expResult);
+        // act
+        JsonArray result = weatherService.get(coords, type, options);
+        //assert
+        assertThat(result.size()).isEqualTo(expResult.size());
+        assertThat(result.get(0).getAsJsonObject().keySet()).isEqualTo(expResult.get(0).getAsJsonObject().keySet());
+    }
 
     /**
      * Test of get method, of class WeatherService.
      */
     @Test
-    public void testGet() {
-        System.out.println("get");
+    public void testGetPeriod() {
+        System.out.println("get period");
         // arrange
         headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -92,10 +123,12 @@ public class WeatherServiceTest {
         expResult.add(expResultObj);
         Mockito.when(externalService.getWeatherForecast(path, headers)).thenReturn(expResult);
         Mockito.when(localCache.getAll(false)).thenReturn(new Object[0]);
+        //Mockito.when(localCache.get(coords + "," + type + "," + options[0] + "," + options[1])).thenReturn(expResult);
         // act
         JsonArray result = weatherService.get(coords, type, options);
         //assert
-        assertThat(result).isEqualTo(expResult);
+        assertThat(result.size()).isEqualTo(expResult.size());
+        assertThat(result.get(0).getAsJsonObject().keySet()).isEqualTo(expResult.get(0).getAsJsonObject().keySet());
     }
     
     /**

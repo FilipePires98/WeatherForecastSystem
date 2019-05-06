@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.is;
 
 
 
@@ -93,6 +94,30 @@ public class WeatherControllerTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0]", hasKey(expResultObj.keySet().toArray()[0])));
     }
+    
+    /**
+     * Test of getWeatherRecent method, of class WeatherController.
+     */
+    @Test
+    public void testGetWeatherRecentBadInput() throws Exception {
+        System.out.println("getWeatherRecent BadInput");
+        // arrange
+        String expResultStr = "{\"time\":1556838000,\"summary\":\"Breezy starting in the afternoon, continuing until evening.\",\"icon\":\"wind\",\"sunriseTime\":1556861541,\"sunsetTime\":1556911989,\"moonPhase\":0.95,\"precipIntensity\":0,\"precipIntensityMax\":0,\"precipProbability\":0,\"temperatureHigh\":72.37,\"temperatureHighTime\":1556877600,\"temperatureLow\":54.23,\"temperatureLowTime\":1556949600,\"apparentTemperatureHigh\":72.37,\"apparentTemperatureHighTime\":1556877600,\"apparentTemperatureLow\":54.23,\"apparentTemperatureLowTime\":1556949600,\"dewPoint\":50.99,\"humidity\":0.72,\"pressure\":1011.42,\"windSpeed\":9.6,\"windGust\":33.66,\"windGustTime\":1556899200,\"windBearing\":4,\"cloudCover\":0.08,\"uvIndex\":7,\"uvIndexTime\":1556884800,\"visibility\":7.08,\"ozone\":346.98,\"temperatureMin\":47.13,\"temperatureMinTime\":1556863200,\"temperatureMax\":72.37,\"temperatureMaxTime\":1556877600,\"apparentTemperatureMin\":44.09,\"apparentTemperatureMinTime\":1556863200,\"apparentTemperatureMax\":72.37,\"apparentTemperatureMaxTime\":1556877600}";
+        JsonObject expResultObj = new JsonParser().parse(expResultStr).getAsJsonObject();
+        JsonArray expResult1 = new JsonArray();
+        JsonArray expResult7 = new JsonArray();
+        expResult1.add(expResultObj);
+        Mockito.when(weatherService.get(latitude + "," + longitude, "recent", new Long[]{Long.valueOf(1)})).thenReturn(expResult1);
+        expResult7.add(expResultObj); expResult7.add(expResultObj); expResult7.add(expResultObj); expResult7.add(expResultObj); expResult7.add(expResultObj); expResult7.add(expResultObj); expResult7.add(expResultObj);
+        Mockito.when(weatherService.get(latitude + "," + longitude, "recent", new Long[]{Long.valueOf(7)})).thenReturn(expResult7);
+        // act and assert
+        mvc.perform(get("/weather/recent/" + latitude + "," + longitude + "/" + -1))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0]", hasKey(expResultObj.keySet().toArray()[0])));
+        mvc.perform(get("/weather/recent/" + latitude + "," + longitude + "/" + 8))
+                .andExpect(jsonPath("$", hasSize(7)))
+                .andExpect(jsonPath("$[0]", hasKey(expResultObj.keySet().toArray()[0])));
+    }
 
     /**
      * Test of getWeatherPeriod method, of class WeatherController.
@@ -112,6 +137,34 @@ public class WeatherControllerTest {
         mvc.perform(get("/weather/period/" + latitude + "," + longitude + "/" + timedate[0] + "," + timedate[1]))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0]", hasKey(expResultObj.keySet().toArray()[0])));
+    }
+    
+    /**
+     * Test of getWeatherPeriod method, of class WeatherController.
+     */
+    @Test
+    public void testGetWeatherPeriodBadInput() throws Exception {
+        System.out.println("getWeatherPeriod BadInput");
+        // arrange
+        Long[] timemillis = new Long[]{1556406000L, 1556406000L};
+        String[] timedate = new String[]{"2019-04-28","2019-04-27"};
+        String expResultStr = "{\"error\":\"-2\", \"message\":\"Invalid dates\"}"; 
+        JsonObject expResultObj = new JsonParser().parse(expResultStr).getAsJsonObject();
+        JsonArray expResult = new JsonArray();
+        expResult.add(expResultObj);
+        Mockito.when(weatherService.get(latitude + "," + longitude, "period", timemillis)).thenReturn(expResult);
+        Mockito.when(weatherService.get(latitude + "," + longitude, "period", new Long[]{-1L, 1556406000L})).thenReturn(expResult);
+        Mockito.when(weatherService.get(latitude + "," + longitude, "period", new Long[]{1556406000L, -1L})).thenReturn(expResult);
+        // act and assert
+        mvc.perform(get("/weather/period/" + latitude + "," + longitude + "/" + timedate[0] + "," + timedate[1]))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0]", hasKey(expResultObj.keySet().toArray()[0])));
+        mvc.perform(get("/weather/period/" + latitude + "," + longitude + "/" + "bad-date" + "," + timedate[1]))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].error", is("-1")));
+        mvc.perform(get("/weather/period/" + latitude + "," + longitude + "/" + timedate[0] + "," + "bad-date"))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].error", is("-1")));
     }
 
     /**
