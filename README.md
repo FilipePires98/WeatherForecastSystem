@@ -19,7 +19,7 @@ web-application - contains the source code of the weather forecast web applicati
 
 ## Additional Resources
 
-![sonarqube](https://github.com/FilipePires98/Weather-Forecast-System/blob/master/docs/img/05_sonarqube_qualitygate.png)
+<img src="https://github.com/FilipePires98/Weather-Forecast-System/blob/master/docs/img/05_sonarqube_qualitygate.png" width="480px">
 
 Static Code Analysis: SonarQube Quality Gate final results.
 
