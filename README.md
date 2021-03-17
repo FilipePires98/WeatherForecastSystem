@@ -1,7 +1,6 @@
 # Simple Weather Forecast System
 
-## Description:
-
+## Description
 
 This project aims to demonstrate the use of several testing levels in a web project with multiple layers.
 The proposed web project is a simple weather forecast service with a minimalist webpage, an integrated REST API and the use of external data sources.
@@ -35,7 +34,7 @@ WebApp’s front page.
 
 WebApp's search results example.
 
-## Author:
+## Author
 
 The author of this repository is Filipe Pires, and the project was developed for the Software Test & Quality Course of the bachelor's degree in Informatics Engineering of the University of Aveiro.
 
