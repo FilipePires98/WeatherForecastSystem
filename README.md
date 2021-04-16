@@ -1,5 +1,6 @@
 # Simple Weather Forecast System
 
+![](https://img.shields.io/badge/Academical%20Project-Yes-success)
 ![](https://img.shields.io/badge/Unit%20Tests-passing-success)
 ![](https://img.shields.io/badge/Coverage-84%25-green)
 ![](https://img.shields.io/badge/Made%20With-Java-red)
