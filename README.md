@@ -1,5 +1,12 @@
 # Simple Weather Forecast System
 
+![](https://img.shields.io/badge/Unit%20Tests-passing-success)
+![](https://img.shields.io/badge/Coverage-84%25-green)
+![](https://img.shields.io/badge/Made%20With-Java-red)
+![](https://img.shields.io/badge/Platform-Web-blue)
+[![](https://img.shields.io/badge/API-Dark%20Sky-lightgrey.svg?style=flat)](https://darksky.net/)
+![](https://img.shields.io/badge/License-Free%20To%20Use-green)
+
 ## Description
 
 This project aims to demonstrate the use of several testing levels in a web project with multiple layers.
